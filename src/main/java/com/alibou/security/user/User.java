@@ -1,5 +1,6 @@
 package com.alibou.security.user;
 
+import com.alibou.security.spending.Spending;
 import com.alibou.security.token.Token;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,6 +40,9 @@ public class User implements UserDetails {
 
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
+
+  @OneToMany(mappedBy = "user")
+  private List<Spending> spendings;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

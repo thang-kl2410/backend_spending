@@ -2,10 +2,8 @@ package com.alibou.security.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -23,5 +21,10 @@ public class UserController {
     ) {
         service.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/current-user")
+    public ResponseEntity<User> getCurrentUser(Principal principal){
+        return ResponseEntity.ok((User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal());
     }
 }
